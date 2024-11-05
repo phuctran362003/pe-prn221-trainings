@@ -12,9 +12,10 @@ namespace EuroDb2023_TranGiaPhuc.Pages
             _logger = logger;
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
 
+            return Page();
         }
     }
 }

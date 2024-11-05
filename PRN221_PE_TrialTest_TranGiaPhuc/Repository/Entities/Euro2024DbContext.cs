@@ -1,8 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Repository.Entities;
 
-namespace Repository;
+namespace Repository.Entities;
 
 public partial class Euro2024DbContext : DbContext
 {

@@ -1,7 +1,14 @@
+using Repository;
+using Repository.Entities;
+using Service;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddDbContext<Euro2024DbContext>();
+builder.Services.AddScoped<AccountService>();
+builder.Services.AddScoped<AccountRepository>();
 
 var app = builder.Build();
 

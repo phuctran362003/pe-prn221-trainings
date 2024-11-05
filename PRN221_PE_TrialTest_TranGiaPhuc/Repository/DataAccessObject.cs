@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Repository.Entities;
 
-namespace Repository.Repositories
+namespace Repository
 {
     public class DataAccessObject<T> where T : class
     {
