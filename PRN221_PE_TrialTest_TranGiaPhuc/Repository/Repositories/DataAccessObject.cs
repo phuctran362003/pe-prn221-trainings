@@ -17,6 +17,7 @@ namespace Repository.Repositories
         {
             _context = context;
         }
+        //test git
 
         // Synchronous method to retrieve all entities
         public List<T> GetAll()
