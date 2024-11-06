@@ -34,7 +34,7 @@ namespace EuroDb2023_TranGiaPhuc.Pages
                     HttpContext.Session.SetString("Email", email);
                     HttpContext.Session.SetInt32("RoleId", account.RoleId ?? default(int));
 
-                    return RedirectToPage("/EuroTeams/Index");
+                    return RedirectToPage("/EuroTeam/Index");
                 }
                 else
                 {
