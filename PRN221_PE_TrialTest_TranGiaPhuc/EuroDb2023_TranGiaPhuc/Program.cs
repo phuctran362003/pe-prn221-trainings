@@ -10,6 +10,10 @@ builder.Services.AddDbContext<Euro2024DbContext>();
 builder.Services.AddScoped<AccountService>();
 builder.Services.AddScoped<AccountRepository>();
 
+//add session
+builder.Services.AddSession();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -26,7 +30,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
-
+//use session
+app.UseSession();
 app.MapRazorPages();
-
 app.Run();
