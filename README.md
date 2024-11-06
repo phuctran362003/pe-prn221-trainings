@@ -1,5 +1,6 @@
 ## ĐÂY LÀ FILE ĐỒ NGHỀ THI PE:
 
+
 ```bash
 dotnet add package Microsoft.EntityFrameworkCore --version 8.0.5
 dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 8.0.5
@@ -8,10 +9,13 @@ dotnet add package Microsoft.Extensions.Configuration --version 8.0.0
 dotnet add package Microsoft.Extensions.Configuration.Json --version 8.0.0
 ```
 
+
+### DATABASE SCAFFOLD ( tự đổi tên server + database của đề)
 ```bash
 dotnet ef dbcontext scaffold "Server=DEVPHUCTRANN; Database=Euro2024DB; User Id=sa; Password=12345; TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer
 ```
 
+### BỎ ĐỐNG NÀY VÀO DBCONTEXT 
 ```csharp
 public static string GetConnectionString(string connectionStringName)
 {
