@@ -30,6 +30,16 @@ public static string GetConnectionString(string connectionStringName)
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     => optionsBuilder.UseSqlServer(GetConnectionString("DefaultConnection"));
 ```
+### TRONG APPSETTINGS.JSON SETUP NHƯ SAU (miễn giống với scaffold là được): 
+```json
+{
+   "ConnectionStrings": {
+  "DefaultConnection": "Server=DEVPHUCTRANN; Database=Euro2024DB; User Id=sa; Password=12345; TrustServerCertificate=True;"
+},
+
+}
+```
+
 
 ### Generic Repository/Data Access Object
 
