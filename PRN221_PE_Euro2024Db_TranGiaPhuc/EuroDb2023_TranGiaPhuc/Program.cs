@@ -10,8 +10,10 @@ builder.Services.AddDbContext<Euro2024DbContext>();
 //service
 builder.Services.AddScoped<AccountService>();
 builder.Services.AddScoped<TeamService>();
+builder.Services.AddScoped<GroupTeamService>();
 //repo
 builder.Services.AddScoped<AccountRepository>();
+builder.Services.AddScoped<GroupTeamRepository>();
 builder.Services.AddScoped<TeamRepository>();
 
 //add session

@@ -36,25 +36,96 @@ namespace Repository
                 PageIndex = pageIndex
             };
         }
-
-
         public async Task<List<Team>> GetList()
         {
             return await _context.Teams.Include(x => x.Group).ToListAsync();
         }
 
-        public List<Team> Search(string position, string groupName)
+        public async Task AddTeam(Team team)
         {
-            var teams = _context.Teams
-                .Include(t => t.Group)
-                .Where(t =>
-                    (t.Position.ToString().Contains(position) || string.IsNullOrEmpty(position)) &&
-                    (t.Group.GroupName.Contains(groupName) || string.IsNullOrEmpty(groupName))
-                )
-                .ToList();
+            try
+            {
+                var exsistingTeam = await GetByIdAsync(team.Id);
+                if (exsistingTeam != null)
+                {
+                    throw new Exception("Team is exsit");
+                }
 
-            return teams;
+                _context.Teams.Add(team);
+                await _context.SaveChangesAsync();
+
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
         }
+
+        public async Task<Team> GetTeamById(int id)
+        {
+            return await _context.Teams.Include(x => x.Group).FirstOrDefaultAsync(m => m.GroupId == id);
+        }
+
+        public async Task UpdateTeam(Team team)
+        {
+            try
+            {
+                var exsistingTeam = await GetTeamById(team.Id);
+                if (exsistingTeam == null)
+                {
+                    throw new Exception("Does not exist");
+                }
+
+                exsistingTeam.TeamName = team.TeamName;
+                exsistingTeam.Point = team.Point;
+                exsistingTeam.Position = team.Position;
+
+                var group = await _context.GroupTeams.FirstOrDefaultAsync(x => x.GroupId == exsistingTeam.GroupId);
+                if (group == null)
+                {
+                    throw new Exception("Supplier does not exist");
+                }
+                exsistingTeam.GroupId = team.GroupId;
+
+                _context.Teams.Update(exsistingTeam);
+                await _context.SaveChangesAsync();
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+        }
+
+        public async Task DeleteTeant(int id)
+        {
+            try
+            {
+                var existArt = _context.Teams.FirstOrDefault(m => m.Id == id);
+                if (existArt == null)
+                {
+                    throw new Exception("Art not found");
+                }
+                _context.Teams.Remove(existArt);
+                await _context.SaveChangesAsync();
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+
+
+
+
+
+
 
 
     }

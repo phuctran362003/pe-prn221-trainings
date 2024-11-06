@@ -1,23 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Repository.Entities;
+using Service;
 
 namespace EuroDb2023_TranGiaPhuc.Pages.EuroTeam
 {
     public class EditModel : PageModel
     {
-        private readonly Repository.Entities.Euro2024DbContext _context;
+        private readonly TeamService _teamService;
+        private readonly GroupTeamService _groupService;
 
-        public EditModel(Repository.Entities.Euro2024DbContext context)
+        public EditModel(TeamService teamService, GroupTeamService groupService)
         {
-            _context = context;
+            _teamService = teamService;
+            _groupService = groupService;
         }
+
 
         [BindProperty]
         public Team Team { get; set; } = default!;
@@ -29,13 +29,16 @@ namespace EuroDb2023_TranGiaPhuc.Pages.EuroTeam
                 return NotFound();
             }
 
-            var team =  await _context.Teams.FirstOrDefaultAsync(m => m.Id == id);
+            var team = await _teamService.GetTeamById(id ?? default(int));
             if (team == null)
             {
                 return NotFound();
             }
             Team = team;
-           ViewData["GroupId"] = new SelectList(_context.GroupTeams, "GroupId", "GroupId");
+
+            var listItems = await _groupService.GetList();
+
+            ViewData["GroupId"] = new SelectList(listItems, "GroupId", "GroupName");
             return Page();
         }
 

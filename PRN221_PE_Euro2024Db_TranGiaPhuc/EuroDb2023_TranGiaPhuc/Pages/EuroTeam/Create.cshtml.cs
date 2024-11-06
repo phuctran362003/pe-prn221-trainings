@@ -1,26 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Repository.Entities;
+using Service;
 
 namespace EuroDb2023_TranGiaPhuc.Pages.EuroTeam
 {
     public class CreateModel : PageModel
     {
-        private readonly Repository.Entities.Euro2024DbContext _context;
+        private readonly TeamService _teamService;
+        private readonly GroupTeamService _groupService;
 
-        public CreateModel(Repository.Entities.Euro2024DbContext context)
+        public CreateModel(TeamService teamService, GroupTeamService groupService)
         {
-            _context = context;
+            _teamService = teamService;
+            _groupService = groupService;
         }
 
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGet()
         {
-        ViewData["GroupId"] = new SelectList(_context.GroupTeams, "GroupId", "GroupId");
+            var listItems = await _groupService.GetList();
+            ViewData["GroupId"] = new SelectList(listItems, "GroupId", "GroupName");
             return Page();
         }
 
@@ -30,15 +30,17 @@ namespace EuroDb2023_TranGiaPhuc.Pages.EuroTeam
         // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return Page();
+                await _teamService.AddTeam(Team);
+                TempData["Message"] = "Create Succesfull";
+                return RedirectToPage("./Index");
             }
-
-            _context.Teams.Add(Team);
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
+            catch (Exception ex)
+            {
+                TempData["Message"] = ex.Message;
+                return await OnGet();
+            }
         }
     }
 }
