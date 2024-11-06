@@ -7,8 +7,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<Euro2024DbContext>();
+//service
 builder.Services.AddScoped<AccountService>();
+builder.Services.AddScoped<TeamService>();
+//repo
 builder.Services.AddScoped<AccountRepository>();
+builder.Services.AddScoped<TeamRepository>();
 
 //add session
 builder.Services.AddSession();

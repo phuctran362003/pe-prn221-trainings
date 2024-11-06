@@ -25,7 +25,7 @@ namespace EuroDb2023_TranGiaPhuc.Pages
             try
             {
                 var account = _accountService.Login(email, password);
-                if (account != null && (account.RoleId == 2 || account.RoleId == 3))
+                if (account != null && (account.RoleId == 1 || account.RoleId == 2))
                 {
                     TempData["Message"] = "Login Success";
                     Console.WriteLine("Login Success");
@@ -34,7 +34,7 @@ namespace EuroDb2023_TranGiaPhuc.Pages
                     HttpContext.Session.SetString("Email", email);
                     HttpContext.Session.SetInt32("RoleId", account.RoleId ?? default(int));
 
-                    return RedirectToPage("/OilPaintingArtPage/Index");
+                    return RedirectToPage("/EuroTeams/Index");
                 }
                 else
                 {
