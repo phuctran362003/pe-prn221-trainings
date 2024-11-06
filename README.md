@@ -1,5 +1,4 @@
-
-Add the following packages to the project:
+"Add the following packages to the project:
 
 ```bash
 dotnet add package Microsoft.EntityFrameworkCore --version 8.0.5
@@ -7,13 +6,13 @@ dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 8.0.5
 dotnet add package Microsoft.EntityFrameworkCore.Tools --version 8.0.5
 dotnet add package Microsoft.Extensions.Configuration --version 8.0.0
 dotnet add package Microsoft.Extensions.Configuration.Json --version 8.0.0
-
+```
 
 ```bash
 dotnet ef dbcontext scaffold "Server=DEVPHUCTRANN; Database=Euro2024DB; User Id=sa; Password=12345; TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer
+```
 
-
-```bash
+```csharp
 public static string GetConnectionString(string connectionStringName)
 {
     var config = new ConfigurationBuilder()
@@ -23,11 +22,14 @@ public static string GetConnectionString(string connectionStringName)
 
     return config.GetConnectionString(connectionStringName);
 }
+
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     => optionsBuilder.UseSqlServer(GetConnectionString("DefaultConnection"));
+```
 
-GENERIC REPOSITORY/ Data Access Object: 
-```bash
+### Generic Repository/Data Access Object
+
+```csharp
 public class DataAccessObject<T> where T : class
 {
     protected FA24_SE1702_PRN221_G3_KoiVeterinaryServiceCenterContext _context;
@@ -83,7 +85,6 @@ public class DataAccessObject<T> where T : class
     {
         var tracker = _context.Attach(entity);
         tracker.State = EntityState.Modified;
-
         return await _context.SaveChangesAsync();
     }
 
@@ -174,3 +175,4 @@ public class DataAccessObject<T> where T : class
 
     #endregion
 }
+```
