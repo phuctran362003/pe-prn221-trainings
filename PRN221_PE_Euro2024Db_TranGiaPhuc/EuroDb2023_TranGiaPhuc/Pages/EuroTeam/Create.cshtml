@@ -3,9 +3,24 @@
 
 @{
     ViewData["Title"] = "Create";
+
+    string? email = HttpContext.Session.GetString("Email");
+    int? role = HttpContext.Session.GetInt32("RoleId");
+
+    if (string.IsNullOrEmpty(email) || role != 1)
+    {
+        TempData["ErrorMessage"] = "You do not have permission to perform this function";
+        Response.Redirect("/Error");
+        return; // Return immediately after redirect
+    }
 }
 
 <h1>Create</h1>
+
+@if (TempData["Message"] != null)
+{
+    <h2 class="text-info">@TempData["Message"]</h2>
+}
 
 <h4>Team</h4>
 <hr />

@@ -62,16 +62,27 @@ namespace Repository
             }
         }
 
+
+
         public async Task<Team> GetTeamById(int id)
         {
-            return await _context.Teams.Include(x => x.Group).FirstOrDefaultAsync(m => m.GroupId == id);
+            var team = await _context.Teams
+                                     .Include(x => x.Group)
+                                     .FirstOrDefaultAsync(m => m.GroupId == id);
+
+            if (team == null)
+            {
+                throw new KeyNotFoundException($"Team with GroupId {id} not found.");
+            }
+
+            return team;
         }
 
         public async Task UpdateTeam(Team team)
         {
             try
             {
-                var exsistingTeam = await GetTeamById(team.Id);
+                var exsistingTeam = await GetByIdAsync(team.Id);
                 if (exsistingTeam == null)
                 {
                     throw new Exception("Does not exist");

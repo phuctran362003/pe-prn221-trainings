@@ -27,9 +27,9 @@ namespace Service
             return _teamRepository.GetList(searchTerm, pageIndex, pageSize);
         }
 
-        public Task<Team> GetTeamById(int id)
+        public async Task<Team> GetTeamByIdAsync(int id)
         {
-            return _teamRepository.GetTeamById(id);
+            return await _teamRepository.GetByIdAsync(id);
         }
 
         public Task UpdateTeam(Team team)

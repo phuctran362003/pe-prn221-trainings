@@ -3,9 +3,19 @@
 
 @{
     ViewData["Title"] = "Edit";
+
+    string? email = HttpContext.Session.GetString("Email");
+    int? role = HttpContext.Session.GetInt32("RoleId");
+
+    if (email == null || (role != 1))
+    {
+        TempData["ErrorMessage"] = "You do not have permission to do this function";
+        Response.Redirect("/Error");
+    }
 }
 
 <h1>Edit</h1>
+
 
 <h4>Team</h4>
 <hr />

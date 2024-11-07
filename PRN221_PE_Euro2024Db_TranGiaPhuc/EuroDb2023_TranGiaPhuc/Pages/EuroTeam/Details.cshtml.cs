@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using Repository.Entities;
+using Service;
 
 namespace EuroDb2023_TranGiaPhuc.Pages.EuroTeam
 {
     public class DetailsModel : PageModel
     {
-        private readonly Repository.Entities.Euro2024DbContext _context;
-
-        public DetailsModel(Repository.Entities.Euro2024DbContext context)
+        private readonly TeamService _teamService;
+        public DetailsModel(TeamService teamService)
         {
-            _context = context;
+            _teamService = teamService;
         }
 
         public Team Team { get; set; } = default!;
@@ -27,7 +22,7 @@ namespace EuroDb2023_TranGiaPhuc.Pages.EuroTeam
                 return NotFound();
             }
 
-            var team = await _context.Teams.FirstOrDefaultAsync(m => m.Id == id);
+            var team = await _teamService.GetTeamByIdAsync(id ?? default(int));
             if (team == null)
             {
                 return NotFound();

@@ -1,21 +1,20 @@
 ﻿@page
 @model EuroDb2023_TranGiaPhuc.Pages.EuroTeam.IndexModel
 
-@{
-    ViewData["Title"] = "Index";
-}
+
+
 
 <h1>Index</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    
+    <a asp-page="./Create">Create New</a>    
 </p>
 
 @if (TempData["Message"] != null)
 {
     <h2 class="text-info">@TempData["Message"]</h2>
 }
-
 
 <form method="get">
     <input type="text" name="searchTerm" />
