@@ -34,7 +34,7 @@ namespace OilPaintingArt_TranGiaPhuc.Pages
                     HttpContext.Session.SetString("Email", email);
                     HttpContext.Session.SetInt32("RoleId", account.Role.GetValueOrDefault());
 
-                    return RedirectToPage("/EuroTeam/Index");
+                    return RedirectToPage("/OilPainting/Index");
                 }
                 else
                 {
