@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Repository.Entities;
 
 namespace Repository
 {
-    internal class AccountRespository
+    public class OilPaintingArtRepository : DataAccessObject<OilPaintingArt>
     {
+        public OilPaintingArtRepository(OilPaintingArt2024DbContext context) : base(context) { }
+
+
     }
 }

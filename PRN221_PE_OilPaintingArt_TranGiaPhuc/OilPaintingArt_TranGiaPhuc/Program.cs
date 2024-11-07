@@ -1,7 +1,34 @@
+using Repository;
+using Repository.Entities;
+using Service;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+//add dbcontext
+builder.Services.AddDbContext<OilPaintingArt2024DbContext>();
+
+
+//repo
+builder.Services.AddScoped<SupplierCompanyRespository>();
+builder.Services.AddScoped<AccountRepository>();
+builder.Services.AddScoped<OilPaintingArtRepository>();
+
+//service
+builder.Services.AddScoped<AccountService>();
+builder.Services.AddScoped<OilPaintingArtService>();
+builder.Services.AddScoped<SupplierCompanyService>();
+
+//session
+builder.Services.AddSession();
+
+
+
+
+
+
 
 var app = builder.Build();
 
@@ -19,6 +46,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseSession();
 
 app.MapRazorPages();
 
