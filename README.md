@@ -46,16 +46,16 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 ```csharp
 public class DataAccessObject<T> where T : class
 {
-    protected FA24_SE1702_PRN221_G3_KoiVeterinaryServiceCenterContext _context;
+    protected OilPaintingArt2024DbContext _context;
 
     // Default constructor, initializes the DbContext if null
-    public GenericRepository()
+    public DataAccessObject()
     {
-        _context ??= new FA24_SE1702_PRN221_G3_KoiVeterinaryServiceCenterContext();
+        _context ??= new OilPaintingArt2024DbContext();
     }
 
     // Constructor that accepts a DbContext
-    public GenericRepository(FA24_SE1702_PRN221_G3_KoiVeterinaryServiceCenterContext context)
+    public DataAccessObject(OilPaintingArt2024DbContext context)
     {
         _context = context;
     }
@@ -190,3 +190,20 @@ public class DataAccessObject<T> where T : class
     #endregion
 }
 ```
+
+//SAMPLE REPOSITORY
+```csharp
+public class AccountRespository : DataAccessObject<SystemAccount>
+{
+    public AccountRespository(OilPaintingArt2024DbContext context) : base(context) { }
+
+    public SystemAccount GetByEmailAndPassword(string email, string password)
+    {
+        return _context.SystemAccounts.FirstOrDefault(a => a.AccountEmail == email && a.AccountPassword == password);
+    }
+
+}
+
+
+```
+

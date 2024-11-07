@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OilPaintingArt_TranGiaPhuc", "OilPaintingArt_TranGiaPhuc\OilPaintingArt_TranGiaPhuc.csproj", "{4CA1903C-5097-4989-A585-FBBB6F21725B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OilPaintingArt_TranGiaPhuc", "OilPaintingArt_TranGiaPhuc\OilPaintingArt_TranGiaPhuc.csproj", "{4CA1903C-5097-4989-A585-FBBB6F21725B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{EE06A213-BD11-48C5-8A18-40D48ED96D1A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{69F56593-5CFB-4752-A087-511988D07ACB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{4CA1903C-5097-4989-A585-FBBB6F21725B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4CA1903C-5097-4989-A585-FBBB6F21725B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4CA1903C-5097-4989-A585-FBBB6F21725B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE06A213-BD11-48C5-8A18-40D48ED96D1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE06A213-BD11-48C5-8A18-40D48ED96D1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE06A213-BD11-48C5-8A18-40D48ED96D1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE06A213-BD11-48C5-8A18-40D48ED96D1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69F56593-5CFB-4752-A087-511988D07ACB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69F56593-5CFB-4752-A087-511988D07ACB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69F56593-5CFB-4752-A087-511988D07ACB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69F56593-5CFB-4752-A087-511988D07ACB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
