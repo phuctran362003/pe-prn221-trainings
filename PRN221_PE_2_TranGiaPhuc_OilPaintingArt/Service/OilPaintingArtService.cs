@@ -32,10 +32,10 @@ namespace Service
             return await _repository.GetOilPaintingArtById(id);
         }
 
-        //public Task UpdateArt(OilPaintingArt art)
-        //{
-        //    return _repository.UpdateArt(art);
-        //}
+        public Task UpdatePainting(OilPaintingArt art)
+        {
+            return _repository.Update(art);
+        }
 
         public Task DeletePainting(int id)
         {

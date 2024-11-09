@@ -85,5 +85,42 @@ namespace Repository
                 throw e;
             }
         }
+
+
+        public async Task Update(OilPaintingArt oilPaintingArt)
+        {
+            try
+            {
+                var existingArt = await GetOilPaintingArtById(oilPaintingArt.OilPaintingArtId);
+                if (existingArt == null)
+                {
+                    throw new Exception("Does not exist");
+                }
+
+                existingArt.ArtTitle = oilPaintingArt.ArtTitle;
+                existingArt.OilPaintingArtLocation = oilPaintingArt.OilPaintingArtLocation;
+                existingArt.OilPaintingArtStyle = oilPaintingArt.OilPaintingArtStyle;
+                existingArt.Artist = oilPaintingArt.Artist;
+                existingArt.NotablFeatures = oilPaintingArt.NotablFeatures;
+                existingArt.PriceOfOilPaintingArt = oilPaintingArt.PriceOfOilPaintingArt;
+                existingArt.StoreQuantity = oilPaintingArt.StoreQuantity;
+                existingArt.CreatedDate = oilPaintingArt.CreatedDate;
+
+                var supplier = await _context.SupplierCompanies.FirstOrDefaultAsync(s => s.SupplierId == oilPaintingArt.SupplierId);
+                if (supplier == null)
+                {
+                    throw new Exception("Supplier does not exist");
+                }
+                existingArt.SupplierId = oilPaintingArt.SupplierId;
+
+                _context.OilPaintingArts.Update(existingArt);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
     }
 }

@@ -1,23 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using Repository.Entities;
+using Service;
 
 namespace OilPaintingArt_TranGiaPhuc.Pages.OilPainting
 {
     public class EditModel : PageModel
     {
-        private readonly Repository.Entities.OilPaintingArt2024DbContext _context;
-
-        public EditModel(Repository.Entities.OilPaintingArt2024DbContext context)
+        private readonly OilPaintingArtService _oilPaintingArtService;
+        private readonly SupplierCompanyService _supplierCompanyService;
+        public EditModel(OilPaintingArtService oilPaintingArtService, SupplierCompanyService supplierCompanyService)
         {
-            _context = context;
+            _oilPaintingArtService = oilPaintingArtService;
+            _supplierCompanyService = supplierCompanyService;
         }
+
 
         [BindProperty]
         public OilPaintingArt OilPaintingArt { get; set; } = default!;
@@ -29,49 +27,36 @@ namespace OilPaintingArt_TranGiaPhuc.Pages.OilPainting
                 return NotFound();
             }
 
-            var oilpaintingart =  await _context.OilPaintingArts.FirstOrDefaultAsync(m => m.OilPaintingArtId == id);
+            var oilpaintingart = await _oilPaintingArtService.GetArtByIdAsync(id ?? default(int));
             if (oilpaintingart == null)
             {
                 return NotFound();
             }
             OilPaintingArt = oilpaintingart;
-           ViewData["SupplierId"] = new SelectList(_context.SupplierCompanies, "SupplierId", "SupplierId");
+
+            var list = await _supplierCompanyService.GetList();
+
+            ViewData["SupplierId"] = new SelectList(list, "SupplierId", "CompanyName");
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more information, see https://aka.ms/RazorPagesCRUD.
+
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            _context.Attach(OilPaintingArt).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                await _oilPaintingArtService.UpdatePainting(OilPaintingArt);
+                TempData["Message"] = "Update Succesfull";
+
+                return RedirectToPage("./Index");
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception ex)
             {
-                if (!OilPaintingArtExists(OilPaintingArt.OilPaintingArtId))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                TempData["Message"] = ex.Message;
+                return Page();
             }
-
-            return RedirectToPage("./Index");
         }
 
-        private bool OilPaintingArtExists(int id)
-        {
-            return _context.OilPaintingArts.Any(e => e.OilPaintingArtId == id);
-        }
+
     }
 }
