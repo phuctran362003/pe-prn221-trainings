@@ -191,7 +191,7 @@ public class DataAccessObject<T> where T : class
 }
 ```
 
-//SAMPLE REPOSITORY
+### SAMPLE REPOSITORY
 ```csharp
 public class AccountRespository : DataAccessObject<SystemAccount>
 {
