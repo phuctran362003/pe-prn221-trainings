@@ -1,0 +1,83 @@
+﻿@page
+@model PRN221_PE_Equipments2024_TranGiaPhuc.Pages.EquipmentManagement.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Equipment</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Equipment.EqId" class="control-label"></label>
+                <input asp-for="Equipment.EqId" class="form-control" />
+                <span asp-validation-for="Equipment.EqId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Equipment.EqCode" class="control-label"></label>
+                <input asp-for="Equipment.EqCode" class="form-control" />
+                <span asp-validation-for="Equipment.EqCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Equipment.EqName" class="control-label"></label>
+                <input asp-for="Equipment.EqName" class="form-control" />
+                <span asp-validation-for="Equipment.EqName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Equipment.Description" class="control-label"></label>
+                <input asp-for="Equipment.Description" class="form-control" />
+                <span asp-validation-for="Equipment.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Equipment.Model" class="control-label"></label>
+                <input asp-for="Equipment.Model" class="form-control" />
+                <span asp-validation-for="Equipment.Model" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Equipment.SupplierName" class="control-label"></label>
+                <input asp-for="Equipment.SupplierName" class="form-control" />
+                <span asp-validation-for="Equipment.SupplierName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Equipment.CreatedAt" class="control-label"></label>
+                <input asp-for="Equipment.CreatedAt" class="form-control" />
+                <span asp-validation-for="Equipment.CreatedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Equipment.UpdatedAt" class="control-label"></label>
+                <input asp-for="Equipment.UpdatedAt" class="form-control" />
+                <span asp-validation-for="Equipment.UpdatedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Equipment.Quantity" class="control-label"></label>
+                <input asp-for="Equipment.Quantity" class="form-control" />
+                <span asp-validation-for="Equipment.Quantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Equipment.Status" class="control-label"></label>
+                <input asp-for="Equipment.Status" class="form-control" />
+                <span asp-validation-for="Equipment.Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Equipment.RoomId" class="control-label"></label>
+                <select asp-for="Equipment.RoomId" class ="form-control" asp-items="ViewBag.RoomId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

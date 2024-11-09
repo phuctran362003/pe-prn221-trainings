@@ -1,0 +1,90 @@
+﻿@page
+@model PRN221_PE_Equipments2024_TranGiaPhuc.Pages.EquipmentManagement.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Equipment[0].EqCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Equipment[0].EqName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Equipment[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Equipment[0].Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Equipment[0].SupplierName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Equipment[0].CreatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Equipment[0].UpdatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Equipment[0].Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Equipment[0].Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Equipment[0].Room)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Equipment) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EqCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EqName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SupplierName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Room.RoomName)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.EqId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.EqId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.EqId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

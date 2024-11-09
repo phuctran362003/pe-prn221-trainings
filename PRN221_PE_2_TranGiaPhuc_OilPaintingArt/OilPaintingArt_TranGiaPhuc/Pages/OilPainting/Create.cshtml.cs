@@ -20,7 +20,7 @@ namespace OilPaintingArt_TranGiaPhuc.Pages.OilPainting
         public async Task<IActionResult> OnGet()
         {
             var listItems = await _supplierCompanyService.GetList();
-            ViewData["SupplierId"] = new SelectList(listItems, "SupplierId", "CompanyName");
+            ViewData["SupplierId"] = new SelectList(listItems, "SupplierId", "RoomName");
             return Page();
         }
 
