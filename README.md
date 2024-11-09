@@ -1,4 +1,4 @@
-d## ĐÂY LÀ FILE ĐỒ NGHỀ THI PE:
+## ĐÂY LÀ FILE ĐỒ NGHỀ THI PE:
 
 
 ```bash
