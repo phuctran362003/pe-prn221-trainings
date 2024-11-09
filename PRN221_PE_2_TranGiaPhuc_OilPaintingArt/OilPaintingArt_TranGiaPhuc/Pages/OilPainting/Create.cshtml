@@ -7,7 +7,7 @@
     string? email = HttpContext.Session.GetString("Email");
     int? role = HttpContext.Session.GetInt32("RoleId");
 
-    if (string.IsNullOrEmpty(email) || role != 1)
+    if (string.IsNullOrEmpty(email) || role != 3)
     {
         TempData["ErrorMessage"] = "You do not have permission to perform this function";
         Response.Redirect("/Error");

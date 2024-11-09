@@ -41,6 +41,11 @@ namespace Repository
             return await _context.OilPaintingArts.Include(x => x.Supplier).ToListAsync();
         }
 
+        public async Task<OilPaintingArt> GetOilPaintingArtById(int id)
+        {
+            return await _context.OilPaintingArts.Include(x => x.Supplier).FirstOrDefaultAsync(m => m.OilPaintingArtId == id);
+        }
+
         public async Task AddArt(OilPaintingArt art)
         {
             try
@@ -58,6 +63,25 @@ namespace Repository
             catch (Exception e)
             {
 
+                throw e;
+            }
+        }
+
+        public async Task DeleteArt(int id)
+        {
+            try
+            {
+                var existArt = _context.OilPaintingArts.FirstOrDefault(m => m.OilPaintingArtId == id);
+                if (existArt == null)
+                {
+                    throw new Exception("Art not found");
+                }
+                _context.OilPaintingArts.Remove(existArt);
+                await _context.SaveChangesAsync();
+
+            }
+            catch (Exception e)
+            {
                 throw e;
             }
         }

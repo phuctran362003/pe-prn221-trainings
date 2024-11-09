@@ -25,7 +25,7 @@ namespace OilPaintingArt_TranGiaPhuc.Pages
             try
             {
                 var account = await _accountService.LoginAsync(email, password);
-                if (account != null && (account.Role == 1 || account.Role == 2))
+                if (account != null && (account.Role == 2 || account.Role == 3))
                 {
                     TempData["Message"] = "Login Success";
                     Console.WriteLine("Login Success");

@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using Repository.Entities;
+using Service;
 
 namespace OilPaintingArt_TranGiaPhuc.Pages.OilPainting
 {
     public class DeleteModel : PageModel
     {
-        private readonly Repository.Entities.OilPaintingArt2024DbContext _context;
-
-        public DeleteModel(Repository.Entities.OilPaintingArt2024DbContext context)
+        private readonly OilPaintingArtService _service;
+        public DeleteModel(OilPaintingArtService service)
         {
-            _context = context;
+            _service = service;
         }
 
         [BindProperty]
@@ -28,7 +23,7 @@ namespace OilPaintingArt_TranGiaPhuc.Pages.OilPainting
                 return NotFound();
             }
 
-            var oilpaintingart = await _context.OilPaintingArts.FirstOrDefaultAsync(m => m.OilPaintingArtId == id);
+            var oilpaintingart = await _service.GetArtByIdAsync(id ?? default(int));
 
             if (oilpaintingart == null)
             {
@@ -43,20 +38,22 @@ namespace OilPaintingArt_TranGiaPhuc.Pages.OilPainting
 
         public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
+                await _service.DeletePainting(id ?? default(int));
+                TempData["Message"] = "Delete Succesfull";
 
-            var oilpaintingart = await _context.OilPaintingArts.FindAsync(id);
-            if (oilpaintingart != null)
+                return RedirectToPage("./Index");
+            }
+            catch (Exception ex)
             {
-                OilPaintingArt = oilpaintingart;
-                _context.OilPaintingArts.Remove(OilPaintingArt);
-                await _context.SaveChangesAsync();
+                TempData["Message"] = ex.Message;
+                return Page();
             }
-
-            return RedirectToPage("./Index");
         }
     }
 }

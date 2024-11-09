@@ -29,7 +29,7 @@ namespace Service
 
         public async Task<OilPaintingArt> GetArtByIdAsync(int id)
         {
-            return await _repository.GetByIdAsync(id);
+            return await _repository.GetOilPaintingArtById(id);
         }
 
         //public Task UpdateArt(OilPaintingArt art)
@@ -37,10 +37,10 @@ namespace Service
         //    return _repository.UpdateArt(art);
         //}
 
-        //public Task DeleteTeam(int id)
-        //{
-        //    return _teamRepository.DeleteTeant(id);
-        //}
+        public Task DeletePainting(int id)
+        {
+            return _repository.DeleteArt(id);
+        }
 
     }
 }

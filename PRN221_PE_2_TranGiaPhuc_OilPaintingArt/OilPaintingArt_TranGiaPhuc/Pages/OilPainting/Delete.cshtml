@@ -3,9 +3,19 @@
 
 @{
     ViewData["Title"] = "Delete";
+    string? email = HttpContext.Session.GetString("Email");
+    int? role = HttpContext.Session.GetInt32("RoleId");
+
+    if (string.IsNullOrEmpty(email) || role != 3)
+    {
+        TempData["ErrorMessage"] = "You do not have permission to perform this function";
+        Response.Redirect("/Error");
+        return; // Return immediately after redirect
+    }
 }
 
 <h1>Delete</h1>
+
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
